@@ -63,6 +63,21 @@ class JellyFinServer:
             endpoint=f"Users/{user_id}/Items", payload=q)
         return result['Items']
 
+    def get_all_movies(self, user_id: str) -> List:
+        """Get all items from JellyFin library
+
+        Returns:
+            List: List of results
+        """
+        q = {
+            'recursive': True,
+            'hasTmdbId': True,
+            'fields': 'ProviderIds'
+        }
+        result = self._get(
+            endpoint=f"Users/{user_id}/Items", payload=q)
+        return result['Items']
+
     def search_by_provider(self, user_id: str, provider: str, item_id: str) -> List:
         """Search items by provider id
 
